@@ -1,0 +1,117 @@
+<!-- Hey! This is the main .html file for all of the frontend website stuff. It's 
+     essentially a combination of clunkily written html and StackOverflow
+     responses that I eventually figured out how to work. Let me know if there are
+     any questions.
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Skipper</title>
+    <meta charset="UTF-8">
+    <title>Python Backend Button</title>
+        <style>
+        :root {
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #212529;
+            --accent: #007bff;
+            --border: #e9ecef;
+        }   
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', -apple-system, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem; }
+
+        button {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.1s, opacity 0.2s;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        button:hover { opacity: 0.9; }
+        button:active { transform: scale(0.98); }
+
+        #output {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1rem;
+            font-family: monospace;
+            font-size: 0.9rem;
+            text-align: left;
+            min-height: 80px;
+        }
+        h2 { 
+        font-size: 0.8rem; 
+        text-transform: uppercase; 
+        letter-spacing: 0.05em; 
+        color: #6c757d; 
+        margin-top: 2rem;
+        }
+        </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Testing in progress...</h1>
+        <button onclick="runScript('first_finch_test')">Run First Finch Test</button>
+
+        <h2>Output:</h2>
+        <pre id="output">Status messages will appear here...</pre>
+    </div>
+    <script>
+        async function runScript(endpoint) {
+            const outputElement = document.getElementById('output');
+            outputElement.textContent = `Sending request to /${endpoint}...`;
+
+            try {
+                const response = await fetch(`/${endpoint}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    outputElement.textContent = 'Success: ' + data.output;
+                } else {
+                    outputElement.textContent = 'Error: ' + data.message;
+                }
+
+            } catch (error) {
+                outputElement.textContent = 'Network Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
+
