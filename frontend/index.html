@@ -1,12 +1,9 @@
-<!-- Hey! This is the main .html file for all of the frontend website stuff. It's 
-     essentially a combination of clunkily written html and StackOverflow
-     responses that I eventually figured out how to work. Let me know if there are
-     any questions.
--->
+<!-- Frontend to the website! -->
 
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- All CSS design code for the graphic design -->
     <title>Skipper</title>
     <meta charset="UTF-8">
     <title>Python Backend Button</title>
@@ -79,12 +76,15 @@
 </head>
 
 <body>
+    <!-- The title and button are set here -->
     <div class="container">
         <h1>Testing in progress...</h1>
         <button onclick="runScript('first_finch_test')">Run First Finch Test</button>
 
         <h2>Output:</h2>
         <pre id="output">Status messages will appear here...</pre>
+        <!-- Just above is the Output: title and the status box that tells us what's going on with the script 
+            Below is the script that connects to the backend! -->
     </div>
     <script>
         async function runScript(endpoint) {
@@ -98,7 +98,6 @@
                         'Content-Type': 'application/json',
                     },
                 });
-
                 const data = await response.json();
 
                 if (data.status === 'success') {
